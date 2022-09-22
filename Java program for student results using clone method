@@ -1,0 +1,56 @@
+class Test {
+
+    int x, y;
+    String name;
+}
+
+class Test2 implements Cloneable {
+
+    int a, b;
+    String name;
+    Test obj = new Test();
+
+    public Object clone() throws CloneNotSupportedException {
+        Test2 t = (Test2) super.clone();
+
+        t.obj = new Test();
+        t.obj.name = obj.name;
+        t.obj.x = obj.x;
+        t.obj.y = obj.y;
+        return t;
+    }
+}
+
+class Main {
+
+    public static void main(String args[])
+            throws CloneNotSupportedException {
+        Test2 t1 = new Test2();
+        t1.name = "San";
+        t1.a = 10;
+        t1.b = 20;
+        t1.obj.x = 80;
+
+        Test2 t3 = (Test2) t1.clone();
+
+        t3.obj.x = 85;
+
+        System.out.println("First sem results");
+        System.out.println("Student name:" + t1.name + "\nRoll no:" + t1.a + "\nAdmission no:" + t1.b + "\ncgpa:" + t1.obj.x);
+        System.out.println("\nSecond sem results");
+        System.out.println("Student name:" + t1.name + "\nRoll no:" + t1.a + "\nAdmission no:" + t1.b + "\ncgpa:" + t3.obj.x);
+    }
+}
+
+//OUTPUT OF THE ABOVE CODE
+First sem results
+Student name:San
+Roll no:10
+Admission no:20
+cgpa:80
+
+Second sem results
+Student name:San
+Roll no:10
+Admission no:20
+cgpa:85
